@@ -1,12 +1,13 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-filters',
   standalone: true,
-  imports: [MatExpansionModule, MatListModule],
+  imports: [MatExpansionModule, MatListModule, CommonModule],
   templateUrl: 'filters.component.html',
 })
 export class FiltersComponent implements OnInit {
