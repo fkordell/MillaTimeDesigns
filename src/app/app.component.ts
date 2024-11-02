@@ -3,7 +3,9 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CartService } from './services/cart.service';
+import { StoreService } from './services/store.service';
 import { Cart } from './models/cart.model';
+
 
 @Component({
   selector: 'app-root',
@@ -18,7 +20,7 @@ import { Cart } from './models/cart.model';
 export class AppComponent implements OnInit {
   cart: Cart  = { items: [] };
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private storeService: StoreService) {}
 
   ngOnInit(): void {
     this.cartService.cart.subscribe((_cart) => {

@@ -1,7 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { StoreService } from '../../../../services/store.service';
+
 
 
 @Component({
@@ -10,18 +13,29 @@ import { CommonModule } from '@angular/common';
   imports: [MatExpansionModule, MatListModule, CommonModule],
   templateUrl: 'filters.component.html',
 })
-export class FiltersComponent implements OnInit {
+export class FiltersComponent implements OnInit, OnDestroy {
   @Output() showCategory = new EventEmitter<string>()
-  categories = ['shoes', 'sports']
+  categories: string[] | undefined;
+  categoriesSubscription: Subscription | undefined;
 
-  constructor() {}
+  constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
-
+    this.categoriesSubscription = this.storeService
+    .getAllCategories()
+    .subscribe((response: Array<string>) => {
+      this.categories = response;
+    })
   }
 
   onShowCategory(category: string): void {
-    this.showCategory.next(category);
+    this.showCategory.emit(category);
+  }
+
+  ngOnDestroy(): void {
+    if (this.categoriesSubscription) {
+      this.categoriesSubscription?.unsubscribe();
+    }
   }
 
   
