@@ -11,7 +11,7 @@ import { StoreService } from '../../../../services/store.service';
   selector: 'app-filters',
   standalone: true,
   imports: [MatExpansionModule, MatListModule, CommonModule],
-  templateUrl: 'filters.component.html',
+  templateUrl: './filters.component.html',
 })
 export class FiltersComponent implements OnInit, OnDestroy {
   @Output() showCategory = new EventEmitter<string>()

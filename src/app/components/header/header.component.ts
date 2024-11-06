@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Cart, CartItem } from '../../models/cart.model';
 import { CartService } from '../../services/cart.service';
+import { AppAuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -23,9 +25,10 @@ import { CartService } from '../../services/cart.service';
    ],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent{
+export class HeaderComponent implements OnInit{
   private _cart: Cart = { items: [] };
-  itemsQuantity = 0
+  itemsQuantity = 0;
+  isAuthenticated$!: Observable<boolean>;
 
   @Input()
   get cart(): Cart {
@@ -40,7 +43,14 @@ export class HeaderComponent{
     .reduce((prev, current) => prev + current, 0)
   }
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private authService: AppAuthService) {}
+
+  ngOnInit(): void {
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
+    this.isAuthenticated$.subscribe(isLoggedIn => {
+      console.log('User is authenticated:', isLoggedIn);
+    });
+  }
 
   getTotal(items: Array<CartItem>): number {
     return this.cartService.getTotal(items);
@@ -50,8 +60,12 @@ export class HeaderComponent{
     this.cartService.clearCart();
   }
 
+  login(): void {
+    this.authService.login();
+  }
+
   onLogout() {
-    
+    this.authService.logout();
   }
 
 }

@@ -1,5 +1,9 @@
 <mat-toolbar class="max-w-7xl mx-auto border-x justify-between">
-    <a routerLink="home">Home</a>
+    <div class="flex space-x-4">
+        <a routerLink="shop">Shop</a>
+        <a routerLink="about">About</a>
+        <a routerLink="contact">Contact</a>
+    </div>
     <div class="flex space-x-0 items-center ml-auto">
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon
@@ -38,9 +42,13 @@
             <mat-icon>account_circle</mat-icon>
         </button>
         <mat-menu #accountMenu="matMenu">
-            <button mat-menu-item routerLink="/profile">Profile</button>
-            <button mat-menu-item routerLink="/">Settings</button>
-            <button mat-menu-item (click)="onLogout()">Logout</button>
+            <ng-container *ngIf="isAuthenticated$ | async; else showLogin">
+                <button mat-menu-item routerLink="account">Account</button>
+                <button mat-menu-item (click)="onLogout()">Logout</button>
+            </ng-container>
+            <ng-template #showLogin>
+                <button mat-menu-item (click)="login()">Login</button>
+            </ng-template>
         </mat-menu>
     </div>
 </mat-toolbar>
