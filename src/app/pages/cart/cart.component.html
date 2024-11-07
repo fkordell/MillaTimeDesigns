@@ -6,7 +6,7 @@
                 <img src="{{element.product}}" alt="product" class="w-[100px]  my-5">
             </td>
             <td mat-footer-cell *matFooterCellDef>
-                <button mat-raised-button routerLink="/home">Continue Shopping</button>
+                <button mat-raised-button routerLink="/shop">Continue Shopping</button>
             </td>
         </ng-container>
         <ng-container matColumnDef="name">
@@ -68,5 +68,5 @@
 </mat-card>
 <mat-card class="max-w-7xl mx-auto flex flex-col items-center py-6" *ngIf="!cart.items.length">
     <p class="text-xl font-semibold mb-4">Your Cart Is Empty</p>
-    <button mat-raised-button routerLink="/home" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Start Shopping</button>
+    <button mat-raised-button routerLink="/shop" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Start Shopping</button>
 </mat-card>
