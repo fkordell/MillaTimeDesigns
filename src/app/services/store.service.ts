@@ -16,6 +16,10 @@ export class StoreService {
 
   }
 
+  getFeaturedProducts(limit = '4', sort = 'desc'): Observable<Array<Product>> {
+    return this.httpClient.get<Array<Product>>(`${STORE_BASE_URL}/products?sort=${sort}&limit=${limit}`);
+  }
+
   getAllCategories(): Observable<Array<string>> {
     return this.httpClient.get<Array<string>>(`${STORE_BASE_URL}/products/categories`)
   }

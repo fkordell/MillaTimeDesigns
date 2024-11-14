@@ -8,6 +8,7 @@ import { ProfileComponent } from './pages/account/components/profile/profile.com
 import { CartComponent } from './pages/cart/cart.component';
 import { ContactFormComponent } from './pages/contact/contact-form.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LandingPageComponent } from './pages/landing/landing-page.component';
 
 export const routes: Routes = [{
     path: 'shop',
@@ -18,7 +19,7 @@ export const routes: Routes = [{
     component: CartComponent
 },
 {
-    path: '', redirectTo: 'shop', pathMatch: 'full'
+    path: '', redirectTo: 'landing', pathMatch: 'full'
 },
 {
     path: 'account',
@@ -47,5 +48,9 @@ export const routes: Routes = [{
 {
     path: 'contact',
     component: ContactFormComponent
+},
+{
+    path: 'landing',
+    component: LandingPageComponent
 }
 ];
