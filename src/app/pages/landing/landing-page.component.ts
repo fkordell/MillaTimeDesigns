@@ -54,7 +54,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   loadFeaturedProducts(): void {
     this.productSubscription = this.storeService.getAllProducts(this.fetchLimit, 'desc')
       .subscribe((products) => {
-        this.featuredProducts = this.getRandomProducts(products, 4);
+        this.featuredProducts = this.getRandomProducts(products, 3);
         console.log('Random Featured products:', this.featuredProducts);
       });
   }
